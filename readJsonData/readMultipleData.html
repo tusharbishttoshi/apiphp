@@ -22,12 +22,25 @@
 <script>
     $(document).ready(function(){
         $.ajax({
-            url:"https://jsonplaceholder.typicode.com/posts/1",
+            url:"https://jsonplaceholder.typicode.com/posts",
             type:"GET",
             success: function(data){
-                 $("#load-data").html(data.userId+"<br><br>"+ data.title+"<br><br>"+data.body);
+                $.each(data,function(key,value){
+                    $("#load-data").append(value.id+" "+value.title+"<br>"+value.body+"<br><br>");
+                });
             }
         });
     });
+    // short cut method to read json data
+    $(document).ready(function(){
+    $.getJSON(
+        "https://jsonplaceholder.typicode.com/posts",
+        function(data){
+            $.each(data,function(key,value){
+                $("#load-data").append(value.id+" "+value.title+"<br>"+value.body+"<br><br>");
+            });
+        }
+    );
+});
 </script>
 </html>
